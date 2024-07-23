@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car List with Modal</title>
+    <link rel="stylesheet" href="car.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        section.CAR {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #1c92d2, #f2fcfe);
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .Car-list {
+            display: inline-block;
+            width: calc(25% - 40px);
+            margin: 20px;
+            text-align: center;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 20px;
+        }
+
+        .Car-list:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .Car-list img.image {
+            width: 100%;
+            border-radius: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .Car-list img.image:hover {
+            opacity: 0.8;
+        }
+
+        .Car-list h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #1c92d2;
+        }
+
+        .Car-list span {
+            display: block;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .buy-button {
+            background-color: #1c92d2;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: #155a8a;
+            transform: scale(1.05);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+            color: #1c92d2;
+            margin: 0 0 20px 0;
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .modal-content form input[type="text"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content form input[type="submit"] {
+            background-color: #1c92d2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .modal-content form input[type="submit"]:hover {
+            background-color: #155a8a;
+            transform: scale(1.05);
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .Car-list {
+                width: calc(33.333% - 40px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .Car-list {
+                width: calc(50% - 40px);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .Car-list {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="CAR">
+        <h2>CAR LIST</h2>
+        
+        <div class="Car-list">
+            <img src="punch.png" class="image" alt="punch">
+            <h3>Punch.Ev</h3>
+            <span>Rs.10.05 Lakh</span>
+            <button class="buy-button" data-car="Punch">Buy</button>
+        </div>
+
+        <div class="Car-list">
+            <img src="nexon.png" class="image" alt="nexon">
+            <h3>Nexon</h3>
+            <span>Rs.14 Lakh</span>
+            <button class="buy-button" data-car="Nexon">Buy</button>
+        </div>
+
+        <div class="Car-list">
+            <img src="tigor.png" class="image" alt="tigor">
+            <h3>Tigor</h3>
+            <span>Rs 6.25 Lakh</span>
+            <button class="buy-button" data-car="Tigor">Buy</button>
+        </div>
+
+        <div class="Car-list">
+            <img src="tiago.png" class="image" alt="tiago">
+            <h3>Tiago</h3>
+            <span>Rs.5 Lakh</span>
+            <button class="buy-button" data-car="Tiago">Buy</button>
+        </div>
+    </section>    
+
+    <!-- The Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Payment Options</h2>
+            <p id="selected-car"></p>
+            <form>
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number">
+                
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date">
+                
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv">
+                
+                <input type="submit" value="Pay Now">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.buy-button');
+            const modal = document.getElementById('paymentModal');
+            const closeModal = document.getElementsByClassName('close')[0];
+            const selectedCarElement = document.getElementById('selected-car');
+        
+            buttons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const carName = event.target.getAttribute('data-car');
+                    selectedCarElement.textContent = `You have chosen to buy the ${carName}`;
+                    modal.style.display = 'block';
+                });
+            });
+        
+            closeModal.onclick = function() {
+                modal.style.display = 'none';
+            }
+        
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

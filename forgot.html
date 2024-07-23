@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="car.css">
+    <script>
+        function validateForgotPasswordForm() {
+            var mobno = document.ForgotPassword.mobno.value;
+
+            if (mobno == "") {
+                alert("Mobile number can't be empty");
+                return false;
+            } else {
+                if (isNaN(mobno)) {
+                    alert("Mobile number must be a number");
+                    return false;
+                }
+                if (mobno.length != 10) {
+                    alert("Mobile number must be 10 digits");
+                    return false;
+                }
+                
+                // Generate a new password and save it to localStorage
+                var newPassword = "newPass123"; // You can generate a more secure password here
+                localStorage.setItem('password', newPassword);
+                document.getElementById('new-password-display').innerText = "Your new password is: " + newPassword;
+
+                return false; // Prevent form submission for demonstration
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top left, #1c92d2, #f2fcfe);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 2.8em;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container input[type="text"] {
+            width: calc(100% - 30px);
+            padding: 15px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container input[type="text"]:focus {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-container input[type="text"]::placeholder {
+            color: #ddd;
+        }
+
+        .form-container input[type="submit"] {
+            width: calc(100% - 30px);
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            margin: 10px 5px;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container a {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            display: inline-block;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        .form-container a:hover {
+            color: #ddd;
+            text-decoration: underline;
+        }
+
+        #new-password-display {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ff0;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+                width: 90%;
+            }
+            
+            .form-container h1 {
+                font-size: 2em;
+            }
+            
+            .form-container input[type="submit"] {
+                width: calc(100% - 20px);
+                margin: 10px 0;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="form-container">
+        <h1>Forgot Password</h1>
+        <form name="ForgotPassword" method="post" action="" onsubmit="return validateForgotPasswordForm()">
+            <input type="text" name="mobno" placeholder="Enter Your Mobile Number" /><br>
+            <input type="submit" value="RESET PASSWORD"><br>
+            <a href="index.html">Back to Login</a><br>
+        </form>
+        <div id="new-password-display"></div>
+    </div>
+</body>
+</html>

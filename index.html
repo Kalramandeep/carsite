@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Site Login</title>
+    <link rel="stylesheet" href="car.css">
+    <script>
+        function validateform() {
+            var mobno = document.Login.mobno.value;
+            var password = document.Login.password.value;
+
+            if (mobno == "" || password == "") {
+                alert("All fields are required");
+                return false;
+            }
+            if (isNaN(mobno) || mobno.length !== 10) {
+                alert("Mobile number must be a 10-digit number");
+                return false;
+            }
+            if (password.length < 4) {
+                alert("Password must be at least 4 characters");
+                return false;
+            }
+
+            // Retrieve the stored credentials from localStorage
+            var storedMobno = localStorage.getItem('mobno');
+            var storedPassword = localStorage.getItem('password');
+
+            if (mobno === storedMobno && password === storedPassword) {
+                window.location.href = "carssite.html"; // Redirect to the main site
+                return false; // Prevent form submission
+            } else {
+                alert("Invalid mobile number or password");
+                return false; // Prevent form submission
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top left, #1c92d2, #f2fcfe);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 2.8em;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="password"] {
+            width: calc(100% - 30px);
+            padding: 15px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container input[type="text"]:focus,
+        .form-container input[type="password"]:focus {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-container input[type="text"]::placeholder,
+        .form-container input[type="password"]::placeholder {
+            color: #ddd;
+        }
+
+        .form-container input[type="submit"],
+        .form-container input[type="button"] {
+            width: calc(50% - 15px);
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            margin: 10px 5px;
+        }
+
+        .form-container input[type="submit"]:hover,
+        .form-container input[type="button"]:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container a {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            display: inline-block;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        .form-container a:hover {
+            color: #ddd;
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+                width: 90%;
+            }
+            
+            .form-container h1 {
+                font-size: 2em;
+            }
+            
+            .form-container input[type="submit"],
+            .form-container input[type="button"] {
+                width: calc(100% - 20px);
+                margin: 10px 0;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="form-container">
+        <h1>Car Site</h1>
+        <form name="Login" method="post" action="" onsubmit="return validateform()">
+            <input type="text" name="mobno" placeholder="Enter Your Mobile Number" /><br>
+            <input type="password" name="password" placeholder="Enter Your Password" /><br>
+            <input type="submit" value="LOGIN">
+            <input type="button" value="CANCEL" onclick="window.location.href='index.html';"><br>
+            <a href="signup.html">Sign Up</a><br>
+            <a href="forgot.html">Forgot Password</a>
+        </form>
+    </div>
+</body>
+</html>

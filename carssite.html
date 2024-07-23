@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Collection</title>
+    <link rel="stylesheet" href="car.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #1c92d2;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+
+        .home {
+            position: relative;
+            height: 70vh;
+            border-bottom: 5px solid #1c92d2;
+            box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 50%;
+            text-align: center;
+        }
+
+        .overlay-text h2 {
+            margin: 0;
+        }
+
+        .overlay-text p {
+            font-size: 1.2em;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CARS COLLECTION</h1>
+        <nav>
+            <ul>
+                <li><a href="#HOME">HOME</a></li>
+                <li><a href="BLOG.HTML">BLOG</a></li>
+                <li><a href="CARLISTING.HTML">CAR LISTING</a></li>
+                <li><a href="ELECTRICCARS.HTML">ELECTRIC CARS</a></li>
+                <li><a href="CONTACT.HTML">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="HOME" class="home">
+        <div class="slides">
+            <div class="slide" style="background-image: url('mercedes3.png.jpg');"></div>
+            <div class="slide" style="background-image: url('bmw.png');"></div>
+            <div class="slide" style="background-image: url('audi.png');"></div>
+        </div>
+        <div class="overlay-text">
+            <h2>Discover Your Dream Car</h2>
+            <p>Explore our exclusive collection of luxury cars</p>
+        </div>
+        <div class="navigation">
+            <button class="nav-button" id="prev">&#10094;</button>
+            <button class="nav-button" id="next">&#10095;</button>
+        </div>
+    </section>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelector('.slides');
+        const slide = document.querySelectorAll('.slide');
+        const totalSlides = slide.length;
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlidePosition();
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlidePosition();
+        });
+
+        function updateSlidePosition() {
+            slides.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlidePosition();
+        }, 5000);
+    </script>
+</body>
+</html>
